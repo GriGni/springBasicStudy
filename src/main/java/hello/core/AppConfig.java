@@ -19,9 +19,14 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 public class AppConfig {
+
+    //@Bean memberService -> new MemoryMemberRepository(); 호출
+    //@Bean orderService -> new MemoryMemberRepository(); 호출
+
     // Bean 에너테이션을 사용하면 스프링 컨테이너에 등록된다.
     @Bean
     public MemberService memberService() {
+        System.out.println("call AppConfig.memberService");
         // 생성자 주입 방식
         return new MemberServiceImpl(memberRepository());
     }
@@ -29,12 +34,14 @@ public class AppConfig {
     //repository 역할
     @Bean
     public MemoryMemberRepository memberRepository() {
+        System.out.println("call AppConfig.memberRepository");
         return new MemoryMemberRepository();
     }
 
     //interface 기반 구현체.
     @Bean
     public OrderService orderService() {
+        System.out.println("call AppConfig.orderService");
         return new OrderServiceImpl(memberRepository(), discountPolicy());
     }
 
