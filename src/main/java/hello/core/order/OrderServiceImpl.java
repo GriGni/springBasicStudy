@@ -11,19 +11,23 @@ public class OrderServiceImpl implements OrderService {
 
 //    private final MemberRepository memberRepository;
 //    private final DiscountPolicy discountPolicy;
-//    private final DiscountPolicy discountPolicy = new FixDiscountPolicy();
+
+    private MemberRepository memberRepository;
+    private DiscountPolicy discountPolicy;
+
+    //    private final DiscountPolicy discountPolicy = new FixDiscountPolicy();
 //    private final DiscountPolicy discountPolicy = new RateDiscountPolicy();
     // 구체에 의존하지 않고 인터페이스에만 의존하게 만들었다.
     // 생성자로 주입할 경우 args 필수 값이다
+    @Autowired
+    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+        this.discountPolicy = discountPolicy;
+        this.memberRepository = memberRepository;
+    }
 //    @Autowired
-//    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
-//        this.discountPolicy = discountPolicy;
-//        this.memberRepository = memberRepository;
-//    }
-    @Autowired
-    private MemberRepository memberRepository;
-    @Autowired
-    private DiscountPolicy discountPolicy;
+//    private MemberRepository memberRepository;
+//    @Autowired
+//    private DiscountPolicy discountPolicy;
 
     // 스프링 빈에 memberRepository가 등록이 안됐을 수도 있다. 선택적으로 적용 가능 @Autowired(required = false)
 //    @Autowired
@@ -35,6 +39,12 @@ public class OrderServiceImpl implements OrderService {
 //    public void setDiscountPolicy(DiscountPolicy discountPolicy) {
 //        this.discountPolicy = discountPolicy;
 //    }
+
+    @Autowired
+    public void init(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+        this.memberRepository = memberRepository;
+        this.discountPolicy = discountPolicy;
+    }
 
 
     @Override
