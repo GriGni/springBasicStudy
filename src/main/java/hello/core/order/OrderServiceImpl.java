@@ -20,7 +20,7 @@ public class OrderServiceImpl implements OrderService {
 
     //    @RequiredArgsConstructor 가 final로 만든 멤버 필드 생성자를 만들어 준다.
     @Autowired
-    public OrderServiceImpl(MemberRepository memberRepository, @Qualifier("mainDiscountPolicy") DiscountPolicy discountPolicy) {
+    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
         this.discountPolicy = discountPolicy;
         this.memberRepository = memberRepository;
     }
